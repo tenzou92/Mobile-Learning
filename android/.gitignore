@@ -1,5 +1,4 @@
-gradle-wrapper.jar
-/.gradle
+.gradle
 /captures/
 /gradlew
 /gradlew.bat
@@ -11,3 +10,6 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+# Ignore environment variable file
+lib/services/AI.env

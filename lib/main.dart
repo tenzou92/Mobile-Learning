@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// Import your constants and pages
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'constant/color.dart';
 import 'pages/RegisterPage.dart';
 import 'pages/auth_page.dart';
@@ -19,6 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await dotenv.load(); // Load environment variables
   runApp(const MyApp());
 }
 

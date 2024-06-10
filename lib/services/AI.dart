@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<String> getAIResponse(String message) async {
-  const apiKey = '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'; // Replace with your actual API key
+  const apiKey = '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'; 
   const apiUrl = 'https://api.openai.com/v1/engines/davinci-003/completions';
 
   final response = await http.post(
