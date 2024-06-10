@@ -17,7 +17,7 @@ Future<String> getAIResponse(String message) async {
       'max_tokens': 50,
       'n': 1,
       'stop': ['\n'],
-    }),
+    })
   );
 
   if (response.statusCode == 200) {
