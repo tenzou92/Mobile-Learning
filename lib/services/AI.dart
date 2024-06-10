@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<String> getAIResponse(String message) async {
-  const apiKey = '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'; 
+  await dotenv.load();
+
+  final apiKey = dotenv.env['OPENAI_API_KEY'] ?? '';
   const apiUrl = 'https://api.openai.com/v1/engines/davinci-003/completions';
 
   final response = await http.post(
