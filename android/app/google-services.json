@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "760222781310",
+    "project_id": "authtutorial-505a9",
+    "storage_bucket": "authtutorial-505a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760222781310:android:bacbf277d25fda775d2d2f",
+        "android_client_info": {
+          "package_name": "com.example.mlearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760222781310-od0bmmilg3ab9g1ghs4ftgmrq4msd3aj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mlearning",
+            "certificate_hash": "84f4b77c5f56dcfdc8acd83740ef76f03fb90f1f"
+          }
+        },
+        {
+          "client_id": "760222781310-nkec6et8l6erbqv50tn9e4ujcc7c0kn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJWoN5lCO42QxW75Nf0ONmXPfQ39PPZG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760222781310-nkec6et8l6erbqv50tn9e4ujcc7c0kn1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "760222781310-na2cm358722k8pbusr6q9i4gtc903ft5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
