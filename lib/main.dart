@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'constant/color.dart';
 import 'pages/RegisterPage.dart';
 import 'pages/auth_page.dart';
@@ -15,11 +14,36 @@ import 'services/edit_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await dotenv.load(); // Load environment variables
+
+  // Initialize Firebase with error handling
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    // Handle Firebase initialization error
+    print('Firebase initialization error: $e');
+    runApp(ErrorApp(errorMessage: 'Failed to initialize Firebase: $e'));
+    return;
+  }
+
   runApp(const MyApp());
+}
+
+class ErrorApp extends StatelessWidget {
+  final String errorMessage;
+  const ErrorApp({Key? key, required this.errorMessage}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Error')),
+        body: Center(child: Text(errorMessage)),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -71,7 +95,7 @@ class MyApp extends StatelessWidget {
             '/quiz': (context) => const QuizScreen(),
             '/leaderboard': (context) => const LeaderboardScreen(),
             '/profile': (context) => const Profile(),
-            '/edit_profile': (context) => const EditProfileScreen(), 
+            '/edit_profile': (context) => const EditProfileScreen(),
           },
         );
       },

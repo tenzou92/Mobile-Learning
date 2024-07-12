@@ -25,7 +25,7 @@ class Subs extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Book for longer. Drive faster. Now even cheaper. Only with Premium.',
+              'Elevate Your C++ Expertise. Premium Learning. Unbeatable Value!',
               style: GoogleFonts.poppins(
                 color: Colors.black,
                 fontSize: 18,
@@ -35,21 +35,21 @@ class Subs extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             SubscriptionFeature(
-              icon: Icons.local_shipping,
-              title: 'Priority delivery',
-              description: 'Skip the wait-list and get your car delivered to your door faster.',
+              icon: Icons.chat_rounded,
+              title: 'Unlimited AI Chatbot Access',
+              description: 'Instant Answers. Uninterrupted Learning. Your C++ Companion, Anytime!',
             ),
             const SizedBox(height: 20),
             SubscriptionFeature(
-              icon: Icons.calendar_today,
-              title: 'Long-term bookings',
-              description: 'No more one-month limit. You can rent a car for up to six months.',
+              icon: Icons.video_collection,
+              title: 'Exclusive and Engaging Tutorials',
+              description: 'Top-Tier Tutorials. Exclusive Content. Elevate Your C++ Skills!',
             ),
             const SizedBox(height: 20),
             SubscriptionFeature(
               icon: Icons.money_off,
-              title: 'Reduced fees',
-              description: 'Drive more, save more. Take 20% off the per-minute driving fee.',
+              title: 'Affordable Premium Subscription',
+              description: 'Learn More, Spend Less. Premium Access at an Unbeatable Price!',
             ),
             const SizedBox(height: 30),
             ElevatedButton(

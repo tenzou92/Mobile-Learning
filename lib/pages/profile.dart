@@ -164,129 +164,131 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.deepPurple,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: userData?.data()?['profilePicUrl'] != null && userData!.data()!['profilePicUrl'].isNotEmpty
-                            ? NetworkImage(userData!.data()!['profilePicUrl'])
-                            : const AssetImage('assets/images/bg.jpeg') as ImageProvider,
-                        onBackgroundImageError: (exception, stackTrace) {
-                          logger.e("Error loading profile image: $exception");
-                        },
-                      ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    currentUser.displayName ?? 'No Username',
-                                    style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                SizedBox(width: 5), // Adjust width to make space between text and icon
-                                IconButton(
-                                  icon: const Icon(Icons.edit, color: Colors.deepPurple),
-                                  onPressed: () => editField('name'),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              currentUser.email ?? '',
-                              style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.camera_alt, color: Colors.deepPurple),
-                        onPressed: uploadImage,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const Divider(),
-                  const SizedBox(height: 20),
-                  if (userData != null)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView( // Added SingleChildScrollView here
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        Text(
-                          'Bio:',
-                          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundImage: userData?.data()?['profilePicUrl'] != null && userData!.data()!['profilePicUrl'].isNotEmpty
+                              ? NetworkImage(userData!.data()!['profilePicUrl'])
+                              : const AssetImage('assets/images/bg.jpeg') as ImageProvider,
+                          onBackgroundImageError: (exception, stackTrace) {
+                            logger.e("Error loading profile image: $exception");
+                          },
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          userData?.data()?['bio'] ?? 'No bio available',
-                          style: GoogleFonts.poppins(fontSize: 16),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () => editField('bio'),
-                          child: Text('Edit Bio', style: GoogleFonts.poppins(color: Colors.white,fontSize: 17)),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepPurple,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      currentUser.displayName ?? 'No Username',
+                                      style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(width: 5), // Adjust width to make space between text and icon
+                                  IconButton(
+                                    icon: const Icon(Icons.edit, color: Colors.deepPurple),
+                                    onPressed: () => editField('name'),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                currentUser.email ?? '',
+                                style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
+                              ),
+                            ],
                           ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.camera_alt, color: Colors.deepPurple),
+                          onPressed: uploadImage,
                         ),
                       ],
                     ),
-                  const SizedBox(height: 20),
-                  const Divider(),
-                  const SizedBox(height: 20),
-                  ListTile(
-                    leading: const Icon(Iconsax.home, color: Colors.deepPurple),
-                    title: Text('Home', style: GoogleFonts.poppins(fontSize: 16)),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/home');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Iconsax.book, color: Colors.deepPurple),
-                    title: Text('Quiz', style: GoogleFonts.poppins(fontSize: 16)),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/quiz');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Iconsax.award, color: Colors.deepPurple),
-                    title: Text('LeaderBoard', style: GoogleFonts.poppins(fontSize: 16)),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/leaderboard');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Iconsax.wallet, color: Colors.deepPurple),
-                    title: Text('Subscription', style: GoogleFonts.poppins(fontSize: 16)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Subs()),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Iconsax.logout, color: Colors.deepPurple),
-                    title: Text('Logout', style: GoogleFonts.poppins(fontSize: 16)),
-                    onTap: () async {
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushReplacementNamed('/login');
-                    },
-                  ),
-                ],
-              ),
+                    const SizedBox(height: 20),
+                    const Divider(),
+                    const SizedBox(height: 20),
+                    if (userData != null)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Bio:',
+                            style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            userData?.data()?['bio'] ?? 'No bio available',
+                            style: GoogleFonts.poppins(fontSize: 16),
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () => editField('bio'),
+                            child: Text('Edit Bio', style: GoogleFonts.poppins(color: Colors.white,fontSize: 17)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepPurple,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    const SizedBox(height: 20),
+                    const Divider(),
+                    const SizedBox(height: 20),
+                    ListTile(
+                      leading: const Icon(Iconsax.home, color: Colors.deepPurple),
+                      title: Text('Home', style: GoogleFonts.poppins(fontSize: 16)),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/home');
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Iconsax.book, color: Colors.deepPurple),
+                      title: Text('Quiz', style: GoogleFonts.poppins(fontSize: 16)),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/quiz');
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Iconsax.award, color: Colors.deepPurple),
+                      title: Text('LeaderBoard', style: GoogleFonts.poppins(fontSize: 16)),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/leaderboard');
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Iconsax.wallet, color: Colors.deepPurple),
+                      title: Text('Subscription', style: GoogleFonts.poppins(fontSize: 16)),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Subs()),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Iconsax.logout, color: Colors.deepPurple),
+                      title: Text('Logout', style: GoogleFonts.poppins(fontSize: 16)),
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      },
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }

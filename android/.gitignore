@@ -11,5 +11,3 @@ key.properties
 **/*.keystore
 **/*.jks
 
-# Ignore environment variable file
-lib/services/AI.env
